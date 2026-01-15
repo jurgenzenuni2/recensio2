@@ -2,6 +2,11 @@
 
 A fast, modern Django app for discovering movies and TV shows, reviewing what you watch, and curating personal lists. Recensio emphasizes performance and mobile-first UX with lazy data-fetching from TMDB, year-aware canonical URLs, and lightweight, responsive UI.
 
+### Home
+![Home Page](src/app/static/images/site-design-imgs/Home.png)
+
+![Home Page 2](src/app/static/images/site-design-imgs/home2.png)
+
 ## Features
 
 - Movie and TV discovery with trending, popular, and filtered browse views
@@ -12,6 +17,14 @@ A fast, modern Django app for discovering movies and TV shows, reviewing what yo
 - Click-time redirect to canonical, year-aware slugs via `/go/<type>/<tmdb_id>/`
 - Performance-first: defers TMDB lookups to click-time or small JSON endpoints and lazy-hydrates UI
 - Mobile UX: compact hero on detail pages, single-column grids on phones, optimized navbar/overlay
+
+## Browse and Lists UI
+
+### Browse
+![Browse Page](src/app/static/images/site-design-imgs/browse.png)
+
+### Lists
+![Lists Page](src/app/static/images/site-design-imgs/lists.png)
 
 ## Tech Stack
 
