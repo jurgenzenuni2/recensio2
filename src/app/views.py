@@ -22,6 +22,7 @@ from .content_service import (
     get_user_lists,
     create_user_list,
     add_to_list,
+    remove_from_list,
     verify_user_owns_list,
     get_user_by_username as cs_get_user_by_username,
     get_list_by_user_and_name,
@@ -879,6 +880,31 @@ def add_to_list_view(request):
         return JsonResponse({'success': True, 'stats': stats})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+@require_POST
+def remove_from_list_view(request):
+    """Remove a movie/show from one of the current user's lists."""
+    if 'user_id' not in request.session:
+        return JsonResponse({'success': False, 'error': 'Not logged in'}, status=401)
+
+    try:
+        data = json.loads(request.body)
+        list_id = data.get('list_id')
+        tmdb_id = data.get('tmdb_id')
+        media_type = data.get('media_type')
+
+        if not all([list_id, tmdb_id, media_type]):
+            return JsonResponse({'success': False, 'error': 'Missing required fields'}, status=400)
+
+        if not verify_user_owns_list(request.session['user_id'], list_id):
+            return JsonResponse({'success': False, 'error': 'Unauthorized list access'}, status=403)
+
+        result = remove_from_list(list_id, tmdb_id, media_type)
+        return JsonResponse({'success': True, **result})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
 
 def members(request):
     q = (request.GET.get('q') or '').strip()

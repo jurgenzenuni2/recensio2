@@ -1463,6 +1463,10 @@ a:hover {
 .content-action-btn:hover {
   background: rgba(255, 255, 255, 0.12);
 }
+.content-action-btn.list-remove-btn:hover {
+  background: rgba(220, 38, 38, 0.9);
+  color: #fff;
+}
 .content-action-btn svg {
   display: block;
   width: 16px;
@@ -1494,9 +1498,10 @@ a:hover {
   bottom: 10px;
 }
 
-/* Home page (Recently Reviewed): posters are smaller, so shrink the pill and icons and nudge up */
+/* Home page (Recently Reviewed): anchor actions inside the smaller poster artwork. */
 .home-page .content-actions {
-  bottom: 44px; /* moved up further for smaller home posters */
+  top: 144px;
+  bottom: auto;
 }
 .home-page .content-actions .content-actions-bar {
   padding: 4px 6px; /* smaller pill */
