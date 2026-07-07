@@ -18,6 +18,7 @@ urlpatterns = [
     path('lists/fetch/', views.fetch_user_lists, name='fetch_user_lists'),
     path('lists/create/', views.create_list_view, name='create_list'),
     path('lists/add-item/', views.add_to_list_view, name='add_to_list'),
+    path('lists/remove-item/', views.remove_from_list_view, name='remove_from_list'),
     path('list/<str:username>/<str:listname>/', views.list_detail, name='list_detail'),
     path('profile/toggle-follow/', views.toggle_follow, name='toggle_follow'),
     path('lists/toggle-like/', views.toggle_like, name='toggle_like'),
