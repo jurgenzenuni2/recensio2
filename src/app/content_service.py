@@ -127,6 +127,51 @@ def add_to_list(list_id, tmdb_id, media_type, title, poster_path=None):
         """, [content_id, content_id])
 
 
+def remove_from_list(list_id, tmdb_id, media_type):
+    """
+    Remove content from a user's list.
+    Returns: dict with removed flag and updated list_count for the content.
+    """
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT id FROM content WHERE tmdb_id = %s AND media_type = %s
+        """, [tmdb_id, media_type])
+        row = cursor.fetchone()
+        if not row:
+            return {'removed': False, 'list_count': 0}
+
+        content_id = row[0]
+        cursor.execute("""
+            DELETE FROM list_items
+            WHERE list_id = %s AND content_id = %s
+        """, [list_id, content_id])
+
+        removed = cursor.rowcount > 0
+        cursor.execute("""
+            UPDATE content
+            SET list_count = (SELECT COUNT(*) FROM list_items WHERE content_id = %s),
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = %s
+        """, [content_id, content_id])
+
+        cursor.execute("""
+            SELECT list_count FROM content WHERE id = %s
+        """, [content_id])
+        count_row = cursor.fetchone()
+
+        if removed:
+            cursor.execute("""
+                UPDATE user_lists
+                SET updated_at = CURRENT_TIMESTAMP
+                WHERE id = %s
+            """, [list_id])
+
+        return {
+            'removed': removed,
+            'list_count': (count_row[0] if count_row else 0) or 0,
+        }
+
+
 def get_user_lists(user_id, is_public: bool | None = None):
     """
     Return all lists for a user. If is_public is provided, filter by it.

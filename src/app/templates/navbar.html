@@ -51,6 +51,18 @@
                 </li>
                 {% endif %}
             </div>
+            <form class="nav-search-form" method="get" action="{% url 'browse' %}" role="search">
+                <input class="nav-search-input" type="search" name="search" placeholder="Search"
+                    value="{% if request.path == '/browse/' %}{{ request.GET.search|default:'' }}{% endif %}"
+                    aria-label="Search movies and shows" autocomplete="off">
+                <button class="nav-search-btn" type="submit" aria-label="Search movies and shows">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </button>
+            </form>
         </div>
     </div>
 </nav>

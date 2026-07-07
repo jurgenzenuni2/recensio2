@@ -56,13 +56,88 @@ html {
 
 /* Ensure main nav links use UI font to contrast with brand */
 .navbar .navbar-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0.45rem 1rem !important;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 /* Slight spacing between right-aligned links and auth buttons */
 .navbar .navbar-nav.ms-auto {
   margin-right: 0.5rem;
+  gap: 0.35rem;
+}
+
+.nav-search-form {
+  display: flex;
+  align-items: center;
+  width: 210px;
+  height: 38px;
+  margin-left: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.18);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-search-form:focus-within {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.24);
+}
+
+.nav-search-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  color: #f0f0f0;
+  padding: 0 0.1rem 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.nav-search-input:focus {
+  outline: none;
+}
+
+.nav-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.nav-search-btn {
+  width: 40px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 40px;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.2s ease;
+}
+
+.nav-search-btn:hover {
+  color: #fff;
 }
 
 /* Navbar links hover - shine white */
@@ -71,53 +146,76 @@ html {
   color: #ffffff !important;
 }
 
+.navbar .navbar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
 /* Navbar active link */
 .navbar .nav-link.active {
   color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Navbar Login Button - White with black text */
+/* Navbar auth buttons */
 .btn-nav-login {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  background-color: #ffffff;
-  color: #000000 !important;
-  border: none;
-  border-radius: 25px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0.45rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f0f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
   margin-left: 0.5rem;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .btn-nav-login:hover {
-  background-color: #f0f0f0;
-  color: #000000 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
-/* Navbar Register Button - Black with white text */
 .btn-nav-register {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  background-color: #000000;
-  color: #ffffff !important;
-  border: none;
-  border-radius: 25px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0.45rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f0f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
   margin-left: 0.5rem;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .btn-nav-register:hover {
-  background-color: #000000;
+  background: rgba(255, 255, 255, 0.15);
   color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 /* Navbar on home page only (over hero) */
@@ -374,6 +472,18 @@ main.profile-page {
     gap: 2px;
     align-items: flex-end;
   }
+  .nav-search-form {
+    width: 100%;
+    margin: 0.45rem 0 0;
+  }
+  .nav-search-input {
+    height: 40px;
+    font-size: 0.95rem;
+  }
+  .nav-search-btn {
+    width: 44px;
+    height: 40px;
+  }
   .navbar .collapse.navbar-collapse .nav-link,
   .navbar .collapsing.navbar-collapse .nav-link {
     color: #e6e6e6 !important;
@@ -382,13 +492,15 @@ main.profile-page {
     padding: 0.65rem 0.75rem;
     border-radius: 8px;
     text-align: right;
+    justify-content: flex-end;
+    width: 100%;
   }
   .navbar .collapse.navbar-collapse .nav-link:hover {
-    background: #1a1a1a;
+    background: rgba(255, 255, 255, 0.13);
     color: #fff !important;
   }
   .navbar .collapsing.navbar-collapse .nav-link:hover {
-    background: #1a1a1a;
+    background: rgba(255, 255, 255, 0.13);
     color: #fff !important;
   }
 
